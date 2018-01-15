@@ -4,6 +4,8 @@ package Events;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.requests.restaction.MessageAction;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,11 +13,53 @@ public class MessageEvents {
     private String strMessage;
     private String strUser;
     private String strChannel;
-    //private MessageChannel sendChannel;
+    private String argOne;
+    private String argTwo;
+
+    public String getStrMessage() {
+        return strMessage;
+    }
+
+    public void setStrMessage(String strMessage) {
+        this.strMessage = strMessage;
+    }
+
+    public String getStrUser() {
+        return strUser;
+    }
+
+    public void setStrUser(String strUser) {
+        this.strUser = strUser;
+    }
+
+    public String getStrChannel() {
+        return strChannel;
+    }
+
+    public void setStrChannel(String strChannel) {
+        this.strChannel = strChannel;
+    }
+
+    public String getArgOne() {
+        return argOne;
+    }
+
+    public void setArgOne(String argOne) {
+        this.argOne = argOne;
+    }
+
+    public String getArgTwo() {
+        return argTwo;
+    }
+
+    public void setArgTwo(String argTwo) {
+        this.argTwo = argTwo;
+    }
 
 
 
-    public void handle(Message message, User user, MessageChannel channel) {
+
+    public void handleMessage(Message message, User user, MessageChannel channel) {
         strMessage = message.getContentRaw();
         strUser = user.getName();
         strChannel = channel.getName();
@@ -37,19 +81,34 @@ public class MessageEvents {
 
         String trimCommand = command.substring(1); //trims off the ! of the command
         String[] commandArgs = trimCommand.split(" "); // splits the message into separate strings using a single white space as the separator
-        List<String> commandList = Arrays.asList(commandArgs); // stores the array as a list
 
-        //statement below used for debugging if needed
-        //System.out.println(commandList);
+        int commandArgsLength = commandArgs.length;
+        argOne = commandArgs[0];
+        if (commandArgsLength > 1) argTwo = commandArgs[1];
 
-        switch (commandList.get(0)) { //test commands again pre-defined commands
-            case "test":
-                channel.sendMessage("Yo, your bot now has a heart").queue();
+        switch (argOne) { //test commands again pre-defined commands
+            case "site":
+                channel.sendMessage("Check out our website -> https://www.category6esports.com/").queue();
+                break;
+            case "hbird":
+                channel.sendMessage("Check out hBird's stream -> https://www.twitch.tv/hbird").queue();
+                break;
+            default:
+                channel.sendMessage("That is not an valid command").queue();
+
         }
-
-
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
