@@ -99,6 +99,9 @@ public class MessageEvents {
                 case "hbird":
                     channel.sendMessage("Check out hBird's stream -> https://www.twitch.tv/hbird").queue();
                     break;
+                case "mittehh":
+                    channel.sendMessage("Check out hBird's stream -> https://www.twitch.tv/mittehh").queue();
+                    break;
             }
         }
     }

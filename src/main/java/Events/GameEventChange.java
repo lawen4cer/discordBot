@@ -18,12 +18,12 @@ public class GameEventChange {
     public void handleGameEventChange(User user, Game game, Guild guild) {
         gameType= game.getType().getKey();
         userName = user.getName();
-        channel = guild.getTextChannelById(402247227071922178L);
+        channel = guild.getTextChannelById(383284329071116288L);
 
         if (gameType == 1) { //game type 1 == streaming
             url = game.getUrl();
             userName = user.getName();
-            channel.sendMessage("Hey @everyone " + userName + " is live at " + url).queue();
+            channel.sendMessage("Hey @everyone " + userName + " is live at " + url + ". Come watch the destruction from the storm!").queue();
         }
 
     }
