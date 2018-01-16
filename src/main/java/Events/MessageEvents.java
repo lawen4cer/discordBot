@@ -100,8 +100,13 @@ public class MessageEvents {
                     channel.sendMessage("Check out hBird's stream -> https://www.twitch.tv/hbird").queue();
                     break;
                 case "mittehh":
-                    channel.sendMessage("Check out hBird's stream -> https://www.twitch.tv/mittehh").queue();
+                    channel.sendMessage("Check out mittehh's stream -> https://www.twitch.tv/mittehh").queue();
                     break;
+                case "forum":
+                    channel.sendMessage("Check out our forum and get involved! -> https://www.category6esports.com/forum").queue();
+                    break;
+                case "shop":
+                    channel.sendMessage("Here, go buy some cat6 merchandise! -> https://www.category6esports.com/shop-1").queue();
             }
         }
     }
