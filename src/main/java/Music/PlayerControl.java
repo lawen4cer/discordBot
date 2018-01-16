@@ -15,10 +15,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.MessageChannel;
-import net.dv8tion.jda.core.entities.VoiceChannel;
+import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -99,7 +96,25 @@ public class PlayerControl extends ListenerAdapter {
             if (command.length == 1) //No channel name was provided to search for.
             {
                 event.getChannel().sendMessage("No channel name was provided to search with to join.").queue();
-            } else {
+            }
+
+                if ("me".equals(command[1])) {
+                    VoiceChannel chan = null;
+                    Member member = null;
+                    try {
+                        member = event.getMember();
+                        chan = member.getVoiceState().getChannel();
+                        try {
+                            guild.getAudioManager().setSendingHandler(mng.sendHandler);
+                            guild.getAudioManager().openAudioConnection(chan);
+                        } catch (IllegalArgumentException e) {
+                            event.getTextChannel().sendMessage("Please join a voice channel before using this command!").queue();
+                        }
+                    }catch (PermissionException ignored){}
+                }
+
+
+            else {
                 VoiceChannel chan = null;
                 try {
                     chan = guild.getVoiceChannelById(command[1]);
@@ -117,7 +132,7 @@ public class PlayerControl extends ListenerAdapter {
                         guild.getAudioManager().openAudioConnection(chan);
                     } catch (PermissionException e) {
                         if (e.getPermission() == Permission.VOICE_CONNECT) {
-                            event.getChannel().sendMessage("Yui does not have permission to connect to: " + chan.getName()).queue();
+                            event.getChannel().sendMessage("StormBot does not have permission to connect to: " + chan.getName()).queue();
                         }
                     }
                 }
@@ -326,3 +341,6 @@ public class PlayerControl extends ListenerAdapter {
     }
 
 }
+
+
+
