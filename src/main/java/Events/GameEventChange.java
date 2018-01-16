@@ -41,7 +41,7 @@ public class GameEventChange {
         if (gameType == 1 && isInList) { //game type 1 == streaming and user is whitelisted
             url = game.getUrl();
             userName = user.getName();
-            channel.sendMessage("Hey @everyone " + userName + " is live at " + url + ". Come watch the destruction from the storm!").queue();
+            channel.sendMessage("Hey @everyone " + userName + " is live at " + url + " ! Come watch the destruction from the storm!").queue();
 
         }
 
