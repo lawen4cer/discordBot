@@ -24,12 +24,12 @@ public class GameEventChange {
 
     public void handleGameEventChange(User user, Game game, Guild guild) {
         whitelist.add(176402603410718720L);
-        whitelist.add(201860276197392385L);
+        //whitelist.add(201860276197392385L);
         whitelist.add(168857926201638913L);
         whitelist.add(173962438507495424L);
         gameType= game.getType().getKey();
         userName = user.getName();
-        channel = guild.getTextChannelById(383284329071116288L);
+        channel = guild.getTextChannelById(402930803396313098L);
 
         if (whitelist.contains(user.getIdLong())){
             isInList = true;

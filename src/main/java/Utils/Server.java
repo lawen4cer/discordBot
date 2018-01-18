@@ -1,6 +1,7 @@
 package Utils;
 
 
+import Events.NewMemberAction;
 import Music.PlayerControl;
 import Events.GameEventChange;
 import Events.MessageEvents;
@@ -11,6 +12,7 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.StatusChangeEvent;
+import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import net.dv8tion.jda.core.hooks.EventListener;
@@ -26,10 +28,11 @@ public class Server implements EventListener {
     private MessageEvents messageEvents = new MessageEvents(); // create a new messageEvents object to forward message events to the handler in the events class
     private StatusChangeEvents statusChangeEvents = new StatusChangeEvents();
     private GameEventChange gameEventChange = new GameEventChange();
+    private NewMemberAction newMemberAction = new NewMemberAction();
 
 
     public static void main(String[] args) throws Exception {
-        JDA jda = new JDABuilder(AccountType.BOT).setGame(Game.playing("www.category6esports.com"))
+        JDA jda = new JDABuilder(AccountType.BOT).setGame(Game.playing("https://www.category6esports.com/"))
                 .setToken(TOKEN)
                 .buildBlocking();
 
@@ -58,9 +61,15 @@ public class Server implements EventListener {
             Guild guild = ((UserGameUpdateEvent) event).getGuild();
             gameEventChange.handleGameEventChange(user, game, guild);
         }
+        else if (event instanceof GuildMemberJoinEvent) {
+            Member member = ((GuildMemberJoinEvent) event).getMember();
+            Guild guild = ((GuildMemberJoinEvent) event).getGuild();
+            newMemberAction.handleNewMember(member, guild);
+        }
     }
 
 }
+
 
 
 
