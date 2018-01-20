@@ -35,13 +35,14 @@ public class GameEventChange {
                 url = game.getUrl();
                 userName = user.getName();
                 channel.sendMessage("Hey @everyone " + userName + " is live at " + url + " ! Come watch the destruction from the storm!").queue();
-            } else if (member.getRoles().contains(streamer))
+            } else if (member.getRoles().contains(streamer)) {
                 url = game.getUrl();
-            userName = user.getName();
-            channel.sendMessage("Hey " + userName + " is live at " + url + " ! Go watch them and show your support!").queue();
+                userName = user.getName();
+                channel.sendMessage("Hey " + userName + " is live at " + url + " ! Go watch them and show your support!").queue();
+            }
+
+
         }
-
-
     }
 }
 
