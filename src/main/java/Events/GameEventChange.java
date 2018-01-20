@@ -16,10 +16,7 @@ public class GameEventChange {
     private TextChannel channel;
     private Role streamer;
     private Member member;
-    private boolean isInList = false;
-    private boolean isStreamer = false;
     List<Long> whitelist = new ArrayList<>();
-    List<Role> validRoles = new ArrayList<>();
 
 
     public void handleGameEventChange(User user, Game game, Guild guild) {
@@ -33,28 +30,15 @@ public class GameEventChange {
         streamer = guild.getRoleById(403634299141881857L);
         member = guild.getMember(user);
 
-
-
-        if (whitelist.contains(user.getIdLong())) {
-            isInList = true;
-        } else if (member.getRoles().contains(streamer)){
-            isStreamer = true;
-        } else  {
-            return;
-        }
-
-
-
-
         if (gameType == 1) { //game type 1 == streaming and user is whitelisted
-            if (isInList) {
+            if (whitelist.contains(user.getIdLong())) {
                 url = game.getUrl();
                 userName = user.getName();
                 channel.sendMessage("Hey @everyone " + userName + " is live at " + url + " ! Come watch the destruction from the storm!").queue();
-            } else if (isStreamer)
+            } else if (member.getRoles().contains(streamer))
                 url = game.getUrl();
-                userName = user.getName();
-                channel.sendMessage("Hey " + userName + " is live at " + url + " ! Go watch them and show your support!" ).queue();
+            userName = user.getName();
+            channel.sendMessage("Hey " + userName + " is live at " + url + " ! Go watch them and show your support!").queue();
         }
 
 
