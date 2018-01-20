@@ -17,6 +17,8 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import net.dv8tion.jda.core.hooks.EventListener;
 
+import java.util.List;
+
 
 /*This class will set up the JDA object with token to access our bot
 * in the main method
@@ -24,14 +26,18 @@ import net.dv8tion.jda.core.hooks.EventListener;
 * the event is an instance of a certain event that we want to scan for*/
 
 public class Server implements EventListener {
-    private static String TOKEN = ""; //this token is the token provided by discord (Insert your bot token here!!!!)
     private MessageEvents messageEvents = new MessageEvents(); // create a new messageEvents object to forward message events to the handler in the events class
     private StatusChangeEvents statusChangeEvents = new StatusChangeEvents();
     private GameEventChange gameEventChange = new GameEventChange();
     private NewMemberAction newMemberAction = new NewMemberAction();
 
+    private static final String TOKEN = Settings.getToken();
+
+
+
 
     public static void main(String[] args) throws Exception {
+
         JDA jda = new JDABuilder(AccountType.BOT).setGame(Game.playing("https://www.category6esports.com/"))
                 .setToken(TOKEN)
                 .buildBlocking();
@@ -49,6 +55,15 @@ public class Server implements EventListener {
             MessageChannel channel = ((MessageReceivedEvent) event).getChannel();
             Guild guild = ((MessageReceivedEvent) event).getGuild();
             messageEvents.handleMessage(message, author, channel, guild);
+
+
+            List<Role> roles = guild.getRoles();
+            for (Role role: roles
+                 ) {
+                System.out.println(role.toString());
+            }
+
+
 
         } else if (event instanceof StatusChangeEvent) {
             JDA.Status status = ((StatusChangeEvent) event).getStatus();
