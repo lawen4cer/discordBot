@@ -1,6 +1,7 @@
 package Events;
 
 
+import FortniteStats.Stats;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.managers.*;
 import net.dv8tion.jda.core.requests.restaction.MessageAction;
@@ -14,7 +15,9 @@ public class MessageEvents {
     private String strChannel;
     private String argOne;
     private String argTwo;
+    private String argThree;
     private Guild guild;
+
 
     public Guild getGuild() {
         return guild;
@@ -86,10 +89,11 @@ public class MessageEvents {
 
     private void handleCommands(Message message, MessageChannel channel, Guild guild) {
 
-        String[] commandArgs = message.getContentRaw().substring(1).split(" ", 2); // splits the message into separate strings using a single white space as the separator
+        String[] commandArgs = message.getContentRaw().substring(1).split(" ", 3); // splits the message into separate strings using a single white space as the separator
 
         int commandArgsLength = commandArgs.length;
         argOne = commandArgs[0];
+
 
         if (commandArgsLength == 1) {
             switch (argOne) { //test commands again pre-defined commands
@@ -107,8 +111,42 @@ public class MessageEvents {
                     break;
                 case "shop":
                     channel.sendMessage("Here, go buy some cat6 merchandise! -> https://www.category6esports.com/shop-1").queue();
+                    break;
+                case "stats":
+                    statsErrorMessage(channel);
+                    break;
+
+            }
+        } else if (commandArgsLength >= 2) {
+            argTwo = commandArgs[1];
+            if (commandArgsLength == 3) {
+                argThree = commandArgs[2];
+            }
+
+
+
+            switch (argOne) {
+                case "stats":
+                    if (commandArgsLength == 3) {
+                        Stats stats = new Stats(argTwo, channel, argThree);
+                        stats.ProcessStats();
+                    } else {
+                        statsErrorMessage(channel);
+                    }
+                    break;
             }
         }
+
+    }
+
+    private void statsErrorMessage(MessageChannel channel) {
+        channel.sendMessage("Make sure you use the correct format for this command! Try **!stats fortnitename gametype** . " +
+                "gametype should equal solo, duo, squad, all").queue();
+    }
+
+
+    public String getArgThree() {
+        return argThree;
     }
 }
 
