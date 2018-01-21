@@ -3,11 +3,7 @@ package Events;
 
 import FortniteStats.Stats;
 import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.managers.*;
-import net.dv8tion.jda.core.requests.restaction.MessageAction;
 
-import java.util.Arrays;
-import java.util.List;
 
 public class MessageEvents {
     private String strMessage;
@@ -110,7 +106,10 @@ public class MessageEvents {
                     channel.sendMessage("Check out our forum and get involved! -> https://www.category6esports.com/forum").queue();
                     break;
                 case "shop":
-                    channel.sendMessage("Here, go buy some cat6 merchandise! -> https://www.category6esports.com/shop-1").queue();
+                    channel.sendMessage("Here, go buy some Category6 merchandise! -> https://www.category6esports.com/shop-1").queue();
+                    break;
+                case "twitter":
+                    channel.sendMessage("Go follow us on twitter to stay up to date with all Category6 news/events -> https://twitter.com/cat6esports").queue();
                     break;
                 case "stats":
                     statsErrorMessage(channel);
@@ -122,7 +121,6 @@ public class MessageEvents {
             if (commandArgsLength == 3) {
                 argThree = commandArgs[2];
             }
-
 
 
             switch (argOne) {
@@ -144,10 +142,6 @@ public class MessageEvents {
                 "gametype should equal solo, duo, squad, all").queue();
     }
 
-
-    public String getArgThree() {
-        return argThree;
-    }
 }
 
 

@@ -17,13 +17,10 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import net.dv8tion.jda.core.hooks.EventListener;
 
-import java.util.List;
-
-
 /*This class will set up the JDA object with token to access our bot
-* in the main method
-* This class will also listen for events and call the appropriate class and handle method when
-* the event is an instance of a certain event that we want to scan for*/
+ * in the main method
+ * This class will also listen for events and call the appropriate class and handle method when
+ * the event is an instance of a certain event that we want to scan for*/
 
 public class Server implements EventListener {
     private MessageEvents messageEvents = new MessageEvents(); // create a new messageEvents object to forward message events to the handler in the events class
@@ -32,8 +29,6 @@ public class Server implements EventListener {
     private NewMemberAction newMemberAction = new NewMemberAction();
 
     private static final String TOKEN = Settings.getToken();
-
-
 
 
     public static void main(String[] args) throws Exception {
@@ -64,7 +59,6 @@ public class Server implements EventListener {
             }*/
 
 
-
         } else if (event instanceof StatusChangeEvent) {
             JDA.Status status = ((StatusChangeEvent) event).getStatus();
             User serverMaintainer = event.getJDA().getUserById(201860276197392385L);
@@ -74,9 +68,12 @@ public class Server implements EventListener {
             User user = ((UserGameUpdateEvent) event).getUser();
             Game game = ((UserGameUpdateEvent) event).getCurrentGame();
             Guild guild = ((UserGameUpdateEvent) event).getGuild();
-            gameEventChange.handleGameEventChange(user, game, guild);
-        }
-        else if (event instanceof GuildMemberJoinEvent) {
+            try {
+                gameEventChange.handleGameEventChange(user, game, guild);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (event instanceof GuildMemberJoinEvent) {
             Member member = ((GuildMemberJoinEvent) event).getMember();
             Guild guild = ((GuildMemberJoinEvent) event).getGuild();
             newMemberAction.handleNewMember(member, guild);
