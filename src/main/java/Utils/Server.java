@@ -57,11 +57,11 @@ public class Server implements EventListener {
             messageEvents.handleMessage(message, author, channel, guild);
 
 
-            List<Role> roles = guild.getRoles();
+            /*List<Role> roles = guild.getRoles();
             for (Role role: roles
                  ) {
                 System.out.println(role.toString());
-            }
+            }*/
 
 
 
