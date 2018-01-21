@@ -69,19 +69,13 @@ public class Player {
 
     public double getWinRate() {
         int percent;
-        percent = (int)winRate;
+        percent = (int) winRate;
         return percent;
     }
 
     public void setWinRate(double winRate) {
         this.winRate = winRate;
     }
-
-
-
-
-
-
 
 
 }

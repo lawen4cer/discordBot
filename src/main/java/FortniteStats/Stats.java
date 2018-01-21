@@ -1,7 +1,5 @@
 package FortniteStats;
 
-import net.dv8tion.jda.core.MessageBuilder;
-import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import okhttp3.*;
 import org.json.JSONException;
@@ -51,7 +49,6 @@ public class Stats {
         });
 
 
-
     }
 
     private void updateDetails(String jsonData) {
@@ -60,7 +57,7 @@ public class Stats {
             initial = new JSONObject(jsonData);
         } catch (JSONException e) {
             e.printStackTrace();
-            channel.sendMessage("There is no data for that username").queue();
+            channel.sendMessage("No data found for that username, check your spelling!").queue();
         }
         JSONObject br = initial.getJSONObject("br");
         JSONObject stats = br.getJSONObject("stats");
@@ -90,18 +87,17 @@ public class Stats {
         player.setWins(gameType.getInt("wins"));
 
 
-
     }
 
     public void updateDisplay(MessageChannel channel) {
         channel.sendMessage("**" + userName + "**" + " Fortnite stats for " + "**" + argThree + "**\n" +
-                                    "\n" +
-                                    "**Matches Played:**  " + player.getMatchesPlayed() + "\n" +
-                                    "**Wins:**  " + player.getWins() + "\n" +
-                                    "**Win Percentage:**  " + player.getWinRate() + "%" + "\n" +
-                                    "**Kills:**  " + player.getKills() + "\n" +
-                                    "**Kill/Death:**  " + player.getKillDeath() + "\n" +
-                                    "**Kills per minute:**  " + player.getKillPerMin() + "\n").queue();
+                "\n" +
+                "**Matches Played:**  " + player.getMatchesPlayed() + "\n" +
+                "**Wins:**  " + player.getWins() + "\n" +
+                "**Win Percentage:**  " + player.getWinRate() + "%" + "\n" +
+                "**Kills:**  " + player.getKills() + "\n" +
+                "**Kill/Death:**  " + player.getKillDeath() + "\n" +
+                "**Kills per minute:**  " + player.getKillPerMin() + "\n").queue();
 
     }
 }
