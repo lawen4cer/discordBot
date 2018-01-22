@@ -125,7 +125,10 @@ public class MessageEvents {
 
             switch (argOne) {
                 case "stats":
-                    if (commandArgsLength == 3) {
+                    if (commandArgsLength == 2) {
+                        Stats stats = new Stats(argTwo, channel);
+                        stats.ProcessStats();
+                    } else if (commandArgsLength == 3) {
                         Stats stats = new Stats(argTwo, channel, argThree);
                         stats.ProcessStats();
                     } else {
@@ -138,8 +141,8 @@ public class MessageEvents {
     }
 
     private void statsErrorMessage(MessageChannel channel) {
-        channel.sendMessage("Make sure you use the correct format for this command! Try **!stats fortnitename gametype** . " +
-                "gametype should equal solo, duo, squad, all").queue();
+        channel.sendMessage("Make sure you use the correct format for this command! Try **!stats fortnitename** . " +
+                "Make sure the Epic username is spelled correctly").queue();
     }
 
 }
