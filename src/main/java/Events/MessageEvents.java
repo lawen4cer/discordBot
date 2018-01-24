@@ -114,6 +114,8 @@ public class MessageEvents {
                     break;
                 case "stats":
                     statsErrorMessage(channel);
+                case "purge":
+                    purgeErrorMessage(channel);
                     break;
 
 
@@ -137,14 +139,23 @@ public class MessageEvents {
                         statsErrorMessage(channel);
                     }
                     break;
-                case "purge" :
+                case "purge":
+                    if (commandArgsLength != 3) {
+                        purgeErrorMessage(channel);
+
+                    }
                     Purge purge = new Purge();
-                    purge.purgeChannel(message, channel, guild, user, argTwo);
+                    purge.purgeChannel(message, channel, guild, user, argTwo, argThree);
                     break;
 
             }
         }
 
+    }
+
+    private void purgeErrorMessage(MessageChannel channel) {
+        channel.sendMessage("Make sure you use the correct format when purging messages. **!purge [direction(top or bottom)] [number of messages to delete]**\n\n" +
+                "Example: **!purge top 4** would delete the top 4 messages of this channel").queue();
     }
 
     private void statsErrorMessage(MessageChannel channel) {

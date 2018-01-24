@@ -1,8 +1,6 @@
 package Admin;
 
-import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.requests.restaction.pagination.PaginationAction;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,46 +12,71 @@ public class Purge {
     private int numOfMessages;
 
 
-    public void purgeChannel(Message message, MessageChannel channel, Guild guild, User user, String numOfMessages) {
+    public void purgeChannel(Message message, MessageChannel channel, Guild guild, User user, String direction, String deleteamount) {
         Role admin = guild.getRoleById(392941839734538242L);
+        List<Message> pastMessages = new ArrayList<>();
 
-        if (numOfMessages.equals("all")){
-            this.numOfMessages = 1000;
-        }else{
-        this.numOfMessages = Integer.parseInt(numOfMessages);
+        if (deleteamount.equals("all")) {
+            numOfMessages = 1000;
+        } else {
+            numOfMessages = Integer.parseInt(deleteamount);
         }
-
 
 
         member = message.getMember();
         roles = member.getRoles();
 
         if (roles.contains(admin)) {
-            List<Message> pastMessages = getAll(channel);
-            Collections.reverse(pastMessages);
-
-            for (Message pastMessage: pastMessages) {
-                channel.deleteMessageById(pastMessage.getId()).queue();
+            if (direction.equals("top")) {
+                pastMessages = getMessagesFromTop(channel);
+            } else if (direction.equals("bottom")) {
+                pastMessages = getMessages(channel);
+            } else {
+                channel.sendMessage("Please specify to either delete messages from top or bottom of this channel").queue();
+                return;
             }
 
-        }
-        else {
+
+            for (Message pastMessage : pastMessages) {
+
+                if (numOfMessages != 0) {
+                    channel.deleteMessageById(pastMessage.getId()).queue();
+                    numOfMessages--;
+                }
+
+            }
+
+
+        } else {
             channel.sendMessage("You do not have the power to do that. See an admin for more info").queue();
         }
 
     }
 
 
-
-    public List<Message> getAll(MessageChannel channel){
+    public List<Message> getMessages(MessageChannel channel) {
         List<Message> pastMessages = new ArrayList<>();
         int i = numOfMessages;
-        for (Message message: channel.getIterableHistory().cache(false)) {
+        for (Message message : channel.getIterableHistory().cache(false)) {
             pastMessages.add(message);
             if (--i <= 0) break;
         }
 
-       return pastMessages;
+        return pastMessages;
+    }
+
+    public List<Message> getMessagesFromTop(MessageChannel channel) {
+        List<Message> pastMessages = new ArrayList<>();
+        int i = 2000;
+        for (Message message : channel.getIterableHistory().cache(false)) {
+            pastMessages.add(message);
+            if (--i <= 0) break;
+        }
+
+        Collections.reverse(pastMessages);
+        return pastMessages;
+
+
     }
 
 
