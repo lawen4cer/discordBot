@@ -1,6 +1,7 @@
 package Events;
 
 
+import Admin.Purge;
 import FortniteStats.Stats;
 import net.dv8tion.jda.core.entities.*;
 
@@ -72,7 +73,7 @@ public class MessageEvents {
 
 
         if (message.getContentRaw().startsWith("!")) { //checks to see if the message starts with an !, which will be the default command invoke character on this bot
-            handleCommands(message, channel, guild); // passes the data off to a separate function to handle commands
+            handleCommands(message, channel, guild, user); // passes the data off to a separate function to handle commands
         }
 
         //commented code below used for debugging if needed
@@ -83,7 +84,7 @@ public class MessageEvents {
 
     }
 
-    private void handleCommands(Message message, MessageChannel channel, Guild guild) {
+    private void handleCommands(Message message, MessageChannel channel, Guild guild, User user) {
 
         String[] commandArgs = message.getContentRaw().substring(1).split(" ", 3); // splits the message into separate strings using a single white space as the separator
 
@@ -115,6 +116,7 @@ public class MessageEvents {
                     statsErrorMessage(channel);
                     break;
 
+
             }
         } else if (commandArgsLength >= 2) {
             argTwo = commandArgs[1];
@@ -135,6 +137,11 @@ public class MessageEvents {
                         statsErrorMessage(channel);
                     }
                     break;
+                case "purge" :
+                    Purge purge = new Purge();
+                    purge.purgeChannel(message, channel, guild, user, argTwo);
+                    break;
+
             }
         }
 
