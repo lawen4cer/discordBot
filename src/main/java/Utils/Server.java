@@ -28,7 +28,7 @@ public class Server implements EventListener {
     private GameEventChange gameEventChange = new GameEventChange();
     private NewMemberAction newMemberAction = new NewMemberAction();
 
-    private static final String TOKEN = "NDAxODk5NjgyMzExMTc2MjAy.DUlw9Q.TLcmjtnf3-3gnPejpOV0FTrAG8s";
+    private static final String TOKEN = "";
 
 
     public static void main(String[] args) throws Exception {
