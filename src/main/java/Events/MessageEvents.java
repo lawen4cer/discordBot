@@ -1,6 +1,7 @@
 package Events;
 
 
+import Admin.Purge;
 import FortniteStats.Stats;
 import net.dv8tion.jda.core.entities.*;
 
@@ -72,7 +73,7 @@ public class MessageEvents {
 
 
         if (message.getContentRaw().startsWith("!")) { //checks to see if the message starts with an !, which will be the default command invoke character on this bot
-            handleCommands(message, channel, guild); // passes the data off to a separate function to handle commands
+            handleCommands(message, channel, guild, user); // passes the data off to a separate function to handle commands
         }
 
         //commented code below used for debugging if needed
@@ -83,7 +84,7 @@ public class MessageEvents {
 
     }
 
-    private void handleCommands(Message message, MessageChannel channel, Guild guild) {
+    private void handleCommands(Message message, MessageChannel channel, Guild guild, User user) {
 
         String[] commandArgs = message.getContentRaw().substring(1).split(" ", 3); // splits the message into separate strings using a single white space as the separator
 
@@ -113,7 +114,10 @@ public class MessageEvents {
                     break;
                 case "stats":
                     statsErrorMessage(channel);
+                case "purge":
+                    purgeErrorMessage(channel);
                     break;
+
 
             }
         } else if (commandArgsLength >= 2) {
@@ -135,9 +139,23 @@ public class MessageEvents {
                         statsErrorMessage(channel);
                     }
                     break;
+                case "purge":
+                    if (commandArgsLength != 3) {
+                        purgeErrorMessage(channel);
+
+                    }
+                    Purge purge = new Purge();
+                    purge.purgeChannel(message, channel, guild, user, argTwo, argThree);
+                    break;
+
             }
         }
 
+    }
+
+    private void purgeErrorMessage(MessageChannel channel) {
+        channel.sendMessage("Make sure you use the correct format when purging messages. **!purge [direction(top or bottom)] [number of messages to delete]**\n\n" +
+                "Example: **!purge top 4** would delete the top 4 messages of this channel").queue();
     }
 
     private void statsErrorMessage(MessageChannel channel) {
