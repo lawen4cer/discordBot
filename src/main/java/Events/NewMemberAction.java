@@ -15,7 +15,8 @@ public class NewMemberAction extends ListenerAdapter {
 
 
         TextChannel channel = guild.getTextChannelById(405892851709509633L);
-        channel.sendMessage("Welcome to the Cat 6 discord " + member.getAsMention() + " . If you are interested in joining a roster and haven't already " +
+
+        channel.sendMessage("Welcome to the Cat6 discord " + member.getAsMention() + " . If you are interested in joining a roster and haven't already " +
                 "done so, go to the forum and fill out the required form at https://www.category6esports.com/forum ! It will be reviewed and we will contact you. " +
                 "Don't hesitate to get involved and play with other members! ").queue();
     }
