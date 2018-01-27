@@ -17,6 +17,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import net.dv8tion.jda.core.hooks.EventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*This class will set up the JDA object with token to access our bot
  * in the main method
  * This class will also listen for events and call the appropriate class and handle method when
@@ -27,6 +30,7 @@ public class Server implements EventListener {
     private StatusChangeEvents statusChangeEvents = new StatusChangeEvents();
     private GameEventChange gameEventChange = new GameEventChange();
     private NewMemberAction newMemberAction = new NewMemberAction();
+    static List<Long> whitelist = new ArrayList<>();
 
     private static final String TOKEN = Settings.getToken();
 
@@ -39,6 +43,11 @@ public class Server implements EventListener {
 
         jda.addEventListener(new Server());
         jda.addEventListener(new PlayerControl());
+
+        whitelist.add(176402603410718720L);
+        //whitelist.add(201860276197392385L);
+        whitelist.add(168857926201638913L);
+        whitelist.add(173962438507495424L);
     }
 
 
@@ -68,8 +77,14 @@ public class Server implements EventListener {
             User user = ((UserGameUpdateEvent) event).getUser();
             Game game = ((UserGameUpdateEvent) event).getCurrentGame();
             Guild guild = ((UserGameUpdateEvent) event).getGuild();
+
             try {
-                gameEventChange.handleGameEventChange(user, game, guild);
+//                System.out.println("Current game: " + game.getType() + "Previous game " + ((UserGameUpdateEvent) event).getPreviousGame().getType() + user);
+//                System.out.println(whitelist);
+                if (((UserGameUpdateEvent) event).getPreviousGame().getType() != Game.GameType.STREAMING) {
+                    gameEventChange.handleGameEventChange(user, game, guild, whitelist);
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

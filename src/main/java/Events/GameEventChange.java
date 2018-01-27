@@ -1,8 +1,10 @@
 package Events;
 
+import Utils.Server;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.managers.ChannelManager;
 
+import javax.xml.soap.Text;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,27 +12,18 @@ import java.util.List;
  * notifying guild members that they are live. Currently is hardcoded to notify @everyone*/
 
 public class GameEventChange {
-    private int gameType;
-    private String url;
-    private String userName;
-    private TextChannel channel;
-    private Role streamer;
-    private Member member;
-    List<Long> whitelist = new ArrayList<>();
 
 
-    public void handleGameEventChange(User user, Game game, Guild guild) {
-        whitelist.add(176402603410718720L);
-        //whitelist.add(201860276197392385L);
-        whitelist.add(168857926201638913L);
-        whitelist.add(173962438507495424L);
-        gameType = game.getType().getKey();
-        userName = user.getName();
-        channel = guild.getTextChannelById(402930803396313098L);
-        streamer = guild.getRoleById(403634299141881857L);
-        member = guild.getMember(user);
+    public void handleGameEventChange(User user, Game game, Guild guild, List whitelist) {
+        String url;
 
-        if (gameType == 1) { //game type 1 == streaming and user is whitelisted
+        Game.GameType gameType = game.getType();
+        String userName = user.getName();
+        TextChannel channel = guild.getTextChannelById(402930803396313098L);
+        Role streamer = guild.getRoleById(403634299141881857L);
+        Member member = guild.getMember(user);
+
+        if (gameType == Game.GameType.STREAMING) {
             if (whitelist.contains(user.getIdLong())) {
                 url = game.getUrl();
                 userName = user.getName();
