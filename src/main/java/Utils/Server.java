@@ -79,8 +79,8 @@ public class Server implements EventListener {
             Guild guild = ((UserGameUpdateEvent) event).getGuild();
 
             try {
-//                System.out.println("Current game: " + game.getType() + "Previous game " + ((UserGameUpdateEvent) event).getPreviousGame().getType() + user);
-//                System.out.println(whitelist);
+                System.out.println("Current game: " + game.getType() + "Previous game " + ((UserGameUpdateEvent) event).getPreviousGame().getType() + user);
+                System.out.println(whitelist);
                 if (((UserGameUpdateEvent) event).getPreviousGame().getType() != Game.GameType.STREAMING) {
                     gameEventChange.handleGameEventChange(user, game, guild, whitelist);
                 }

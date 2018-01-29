@@ -16,9 +16,9 @@ public class GameEventChange {
 
     public void handleGameEventChange(User user, Game game, Guild guild, List whitelist) {
         String url;
+        String userName;
 
         Game.GameType gameType = game.getType();
-        String userName = user.getName();
         TextChannel channel = guild.getTextChannelById(402930803396313098L);
         Role streamer = guild.getRoleById(403634299141881857L);
         Member member = guild.getMember(user);
