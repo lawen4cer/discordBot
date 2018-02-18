@@ -30,7 +30,7 @@ public class Server implements EventListener {
     private StatusChangeEvents statusChangeEvents = new StatusChangeEvents();
     private GameEventChange gameEventChange = new GameEventChange();
     private NewMemberAction newMemberAction = new NewMemberAction();
-    static List<Long> whitelist = new ArrayList<>();
+
 
     private static final String TOKEN = Settings.getToken();
 
@@ -44,10 +44,6 @@ public class Server implements EventListener {
         jda.addEventListener(new Server());
         jda.addEventListener(new PlayerControl());
 
-        whitelist.add(176402603410718720L);
-        //whitelist.add(201860276197392385L);
-        whitelist.add(168857926201638913L);
-        whitelist.add(173962438507495424L);
     }
 
 
@@ -80,13 +76,13 @@ public class Server implements EventListener {
 
             try {
                 System.out.println("Current game: " + game.getType() + "Previous game " + ((UserGameUpdateEvent) event).getPreviousGame().getType() + user);
-                System.out.println(whitelist);
+
                 if (((UserGameUpdateEvent) event).getPreviousGame().getType() != Game.GameType.STREAMING) {
-                    gameEventChange.handleGameEventChange(user, game, guild, whitelist);
+                    gameEventChange.handleGameEventChange(user, game, guild);
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+
             }
         } else if (event instanceof GuildMemberJoinEvent) {
             Member member = ((GuildMemberJoinEvent) event).getMember();
