@@ -3,7 +3,10 @@ package Events;
 
 import Admin.Purge;
 import FortniteStats.Stats;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
+
+import java.util.List;
 
 
 public class MessageEvents {
@@ -85,6 +88,7 @@ public class MessageEvents {
     }
 
     private void handleCommands(Message message, MessageChannel channel, Guild guild, User user) {
+        Member member = guild.getMember(user);
 
         String[] commandArgs = message.getContentRaw().substring(1).split(" ", 3); // splits the message into separate strings using a single white space as the separator
 
@@ -112,8 +116,80 @@ public class MessageEvents {
                 case "twitter":
                     channel.sendMessage("Go follow us on twitter to stay up to date with all Category6 news/events -> https://twitter.com/cat6esports").queue();
                     break;
+                case "5":
+                    if (member.hasPermission(Permission.ADMINISTRATOR)) {
+                        channel.sendMessage("@everyone **FIVE MINUTES** until the next queue for Fortnite Squads. " +
+                                "**EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown. " +
+                                "**FIVE MINUTES** until the next queue for Fortnite Squads. **EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown.").queue();
+                    }
+                    else    {
+                        channel.sendMessage("You must be admin to use this command!").queue();
+                    }
+                    break;
+
+                case "4":
+                    if (member.hasPermission(Permission.ADMINISTRATOR)) {
+                        channel.sendMessage("@everyone **FOUR MINUTES** until the next queue for Fortnite Squads. " +
+                                "**EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown. " +
+                                "**FOUR MINUTES** until the next queue for Fortnite Squads. **EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown.").queue();
+                    }
+                    else    {
+                        channel.sendMessage("You must be admin to use this command!").queue();
+                    }
+                    break;
+                case "3":
+                    if (member.hasPermission(Permission.ADMINISTRATOR)) {
+                        channel.sendMessage("@everyone **THREE MINUTES** until the next queue for Fortnite Squads. " +
+                                "**EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown. " +
+                                "**THREE MINUTES** until the next queue for Fortnite Squads. **EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown.").queue();
+                    }
+                    else    {
+                        channel.sendMessage("You must be admin to use this command!").queue();
+                    }
+                    break;
+                case "2":
+                    if (member.hasPermission(Permission.ADMINISTRATOR)) {
+                        channel.sendMessage("@everyone **TWO MINUTES** until the next queue for Fortnite Squads. " +
+                                "**EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown. " +
+                                "**TWO MINUTES** until the next queue for Fortnite Squads. **EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown.").queue();
+                    }
+                    else    {
+                        channel.sendMessage("You must be admin to use this command!").queue();
+                    }
+                    break;
+                case "1":
+                    if (member.hasPermission(Permission.ADMINISTRATOR)) {
+                        channel.sendMessage("@everyone **ONE MINUTE** until the next queue for Fortnite Squads. " +
+                                "**EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown. " +
+                                "**ONE MINUTE** until the next queue for Fortnite Squads. **EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown.").queue();
+                    }
+                    else    {
+                        channel.sendMessage("You must be admin to use this command!").queue();
+                    }
+                    break;
+                case "30":
+                    if (member.hasPermission(Permission.ADMINISTRATOR)) {
+                        channel.sendMessage("@everyone **30 SECONDS** until the next queue for Fortnite Squads. " +
+                                "**EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown. " +
+                                "**30 SECONDS** until the next queue for Fortnite Squads. **EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown.").queue();
+                    }
+                    else    {
+                        channel.sendMessage("You must be admin to use this command!").queue();
+                    }
+                    break;
+                case "15":
+                    if (member.hasPermission(Permission.ADMINISTRATOR)) {
+                        channel.sendMessage("@everyone **15 SECONDS** until the next queue for Fortnite Squads. " +
+                                "**EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown. " +
+                                "**15 SECONDS** until the next queue for Fortnite Squads. **EAST SERVERS** Be sure to have a **PLAYER** in the \"Fortnite Queue Room\" to hear the countdown.").queue();
+                    }
+                    else    {
+                        channel.sendMessage("You must be admin to use this command!").queue();
+                    }
+                    break;
                 case "stats":
                     statsErrorMessage(channel);
+                    break;
                 case "purge":
                     purgeErrorMessage(channel);
                     break;
@@ -164,6 +240,9 @@ public class MessageEvents {
     }
 
 }
+
+
+
 
 
 

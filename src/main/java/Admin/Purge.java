@@ -1,5 +1,6 @@
 package Admin;
 
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class Purge {
         member = message.getMember();
         roles = member.getRoles();
 
-        if (roles.contains(admin)) {
+        if (member.hasPermission(Permission.ADMINISTRATOR)) {
             if (direction.equals("top")) {
                 pastMessages = getMessagesFromTop(channel);
             } else if (direction.equals("bottom")) {
