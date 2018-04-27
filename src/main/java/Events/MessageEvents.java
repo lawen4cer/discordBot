@@ -119,129 +119,59 @@ public class MessageEvents {
                     break;
                 case "5":
                     if (member.hasPermission(Permission.ADMINISTRATOR)) {
-                        EmbedBuilder eb = new EmbedBuilder();
-                        eb.setTitle("Category 6 Storm Scrims")
-                                .setThumbnail("https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg")
-                                .setDescription("**FIVE MINUTES** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown. \n\n" +
-                                        "**FIVE MINUTES** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown.")
-                                .setFooter("www.category6esports.com",
-                                        "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
-
                         channel.sendMessage("@here").queue();
-                        channel.sendMessage(eb.build()).queue();
-                    }
-                    else    {
+                        channel.sendMessage(formatCountdownMessage("5", "MINUTES")).queue();
+                    } else {
                         channel.sendMessage("You must be admin to use this command!").queue();
                     }
                     break;
 
                 case "4":
                     if (member.hasPermission(Permission.ADMINISTRATOR)) {
-                        EmbedBuilder eb = new EmbedBuilder();
-                        eb.setTitle("Category 6 Storm Scrims")
-                                .setThumbnail("https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg")
-                                .setDescription("**FOUR MINUTES** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown. \n\n" +
-                                        "**FOUR MINUTES** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown.")
-                                .setFooter("www.category6esports.com",
-                                        "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
-
                         channel.sendMessage("@here").queue();
-                        channel.sendMessage(eb.build()).queue();}
-                    else    {
+                        channel.sendMessage(formatCountdownMessage("4", "MINUTES")).queue();
+                    } else {
                         channel.sendMessage("You must be admin to use this command!").queue();
                     }
                     break;
                 case "3":
                     if (member.hasPermission(Permission.ADMINISTRATOR)) {
-                        EmbedBuilder eb = new EmbedBuilder();
-                        eb.setTitle("Category 6 Storm Scrims")
-                                .setThumbnail("https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg")
-                                .setDescription("**THREE MINUTES** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown. \n\n" +
-                                        "**THREE MINUTES** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown.")
-                                .setFooter("www.category6esports.com",
-                                        "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
-
                         channel.sendMessage("@here").queue();
-                        channel.sendMessage(eb.build()).queue();}
-                    else    {
+                        channel.sendMessage(formatCountdownMessage("3", "MINUTES")).queue();
+                    } else {
                         channel.sendMessage("You must be admin to use this command!").queue();
                     }
                     break;
                 case "2":
                     if (member.hasPermission(Permission.ADMINISTRATOR)) {
-                        EmbedBuilder eb = new EmbedBuilder();
-                        eb.setTitle("Category 6 Storm Scrims")
-                                .setThumbnail("https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg")
-                                .setDescription("**TWO MINUTES** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown. \n\n" +
-                                        "**TWO MINUTES** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown.")
-                                .setFooter("www.category6esports.com",
-                                        "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
-
                         channel.sendMessage("@here").queue();
-                        channel.sendMessage(eb.build()).queue();}
-                    else    {
+                        channel.sendMessage(formatCountdownMessage("2", "MINUTES")).queue();
+                    } else {
                         channel.sendMessage("You must be admin to use this command!").queue();
                     }
                     break;
                 case "1":
                     if (member.hasPermission(Permission.ADMINISTRATOR)) {
-                        EmbedBuilder eb = new EmbedBuilder();
-                        eb.setTitle("Category 6 Storm Scrims")
-                                .setThumbnail("https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg")
-                                .setDescription("**ONE MINUTE** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown. \n\n" +
-                                        "**ONE MINUTE** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown.")
-                                .setFooter("www.category6esports.com",
-                                        "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
-
                         channel.sendMessage("@here").queue();
-                        channel.sendMessage(eb.build()).queue();}
-                    else    {
+                        channel.sendMessage(formatCountdownMessage("1", "MINUTE")).queue();
+                    } else {
                         channel.sendMessage("You must be admin to use this command!").queue();
                     }
                     break;
                 case "30":
                     if (member.hasPermission(Permission.ADMINISTRATOR)) {
-                        EmbedBuilder eb = new EmbedBuilder();
-                        eb.setTitle("Category 6 Storm Scrims")
-                                .setThumbnail("https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg")
-                                .setDescription("**30 SECONDS** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown. \n\n" +
-                                        "**30 SECONDS** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown.")
-                                .setFooter("www.category6esports.com",
-                                        "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
-
                         channel.sendMessage("@here").queue();
-                        channel.sendMessage(eb.build()).queue();}
-                    else    {
+                        channel.sendMessage(formatCountdownMessage("30", "SECONDS")).queue();
+                    } else {
                         channel.sendMessage("You must be admin to use this command!").queue();
                     }
                     break;
                 case "15":
                     if (member.hasPermission(Permission.ADMINISTRATOR)) {
-                        EmbedBuilder eb = new EmbedBuilder();
-                        eb.setTitle("Category 6 Storm Scrims")
-                                .setThumbnail("https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg")
-                                .setDescription("**15 SECONDS** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown. \n\n" +
-                                        "**15 SECONDS** until the next queue for Fortnite Squads. \n\n" +
-                                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown.")
-                                .setFooter("www.category6esports.com",
-                                        "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
 
                         channel.sendMessage("@here").queue();
-                        channel.sendMessage(eb.build()).queue();}
-                    else    {
+                        channel.sendMessage(formatCountdownMessage("15", "SECONDS")).queue();
+                    } else {
                         channel.sendMessage("You must be admin to use this command!").queue();
                     }
                     break;
@@ -295,6 +225,23 @@ public class MessageEvents {
     private void statsErrorMessage(MessageChannel channel) {
         channel.sendMessage("Make sure you use the correct format for this command! Try **!stats fortnitename** . " +
                 "Make sure the Epic username is spelled correctly").queue();
+    }
+
+    private MessageEmbed formatCountdownMessage(String time, String minutes) {
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Category 6 Storm Scrims")
+                .setThumbnail("https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg")
+                .setDescription("**" + time + " " + minutes + " " + "**" + "until the next queue for Fortnite Squads. \n\n" +
+                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown. \n\n" +
+                        "**" + time + " " + minutes + "**" + " until the next queue for Fortnite Squads. \n\n" +
+                        "**EAST SERVERS** Be sure to have a **PLAYER** in the Fortnite Queue Room to hear the countdown.")
+                .setFooter("www.category6esports.com",
+                        "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
+
+        return eb.build();
+
+
     }
 
 }
