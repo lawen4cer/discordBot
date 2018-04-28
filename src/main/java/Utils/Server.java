@@ -17,8 +17,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.user.UserGameUpdateEvent;
 import net.dv8tion.jda.core.hooks.EventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /*This class will set up the JDA object with token to access our bot
  * in the main method
@@ -32,13 +30,16 @@ public class Server implements EventListener {
     private NewMemberAction newMemberAction = new NewMemberAction();
 
 
-    private static final String TOKEN = Settings.getToken();
+    private static String token = "";
 
 
     public static void main(String[] args) throws Exception {
 
+        Settings.path = args[0];
+        token = Settings.getToken();
+
         JDA jda = new JDABuilder(AccountType.BOT).setGame(Game.playing("https://www.category6esports.com/"))
-                .setToken(TOKEN)
+                .setToken(token)
                 .buildBlocking();
 
         jda.addEventListener(new Server());
