@@ -1,6 +1,7 @@
 package FortniteStats;
 
 
+import Utils.Settings;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import okhttp3.*;
@@ -70,7 +71,7 @@ public class Stats {
     public void ProcessStats() {
 
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().header("TRN-Api-Key", "81dd8e30-7ad2-4b38-a90f-4d3099add32b")
+        Request request = new Request.Builder().header("TRN-Api-Key", Settings.getApiKey())
                 .url(urlBuild())
                 .build();
         Call call = client.newCall(request);
@@ -114,6 +115,7 @@ public class Stats {
         JSONObject stats = null;
         try {
             stats = initial.getJSONObject("stats");
+
         } catch (JSONException e) {
             e.printStackTrace();
             channel.sendMessage("I can't find any stats for that player, double check your spelling").queue();
@@ -139,10 +141,18 @@ public class Stats {
         }
 
         try {
-            JSONObject soloWinPercentage = solo.getJSONObject("winRatio");
-            player.setSoloWinPercentage(soloWinPercentage.getDouble("valueDec"));
+            if (solo.has("winRatio")) {
+                JSONObject soloWinPercentage = solo.getJSONObject("winRatio");
+                player.setSoloWinPercentage(soloWinPercentage.getDouble("valueDec"));
+            } else {
+                player.setSoloWinPercentage(0);
+            }
+
+
         } catch (JSONException e) {
             e.printStackTrace();
+
+
         }
 
         try {
@@ -262,10 +272,15 @@ public class Stats {
         player.setTotalMatchesPlayed(totalMatches.getString("value"));
         JSONObject totalKills = total.getJSONObject(10);
         player.setTotalKills(totalKills.getString("value"));
-        JSONObject totalSurvivalTime = total.getJSONObject(14);
-        player.setTotalSurvivalTime(totalSurvivalTime.getString("value"));
-        JSONObject totalTimePlayed = total.getJSONObject(13);
-        player.setTotalTimePlayed(totalTimePlayed.getString("value"));
+        JSONObject totalScore = total.getJSONObject(6);
+        player.setTotalScore(totalScore.getString("value"));
+
+
+        //Obsolete
+//        JSONObject totalSurvivalTime = total.getJSONObject(14);
+//        player.setTotalSurvivalTime(totalSurvivalTime.getString("value"));
+//        JSONObject totalTimePlayed = total.getJSONObject(13);
+//        player.setTotalTimePlayed(totalTimePlayed.getString("value"));
 
 
     }
@@ -310,7 +325,7 @@ public class Stats {
                 .addField("**Total Win %**", player.getTotalWinPercentage(), true)
                 .addField("**Total Kills**", player.getTotalKills(), true)
                 .addField("**Total K/D**", player.getTotalKillDeath(), true)
-                .addField("**Total Play Time**", player.getTotalTimePlayed(), true)
+                .addField("**Total Score**", player.getTotalScore(), true)
                 .setFooter("www.category6esports.com",
                         "https://pbs.twimg.com/profile_images/952298315030454273/0JTwceUq_400x400.jpg");
 

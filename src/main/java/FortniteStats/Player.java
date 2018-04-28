@@ -20,6 +20,8 @@ public class Player {
     private int squadWins = 0;
     private double squadKillDeath = 0;
     private double squadKillsPerGame = 0;
+
+
     private String totalKills = "0";
     private String totalMatchesPlayed = "0";
     private String totalWinPercentage = "0";
@@ -28,6 +30,15 @@ public class Player {
     private String totalKillsPerGame = "0";
     private String totalSurvivalTime = "0";
     private String totalTimePlayed = "0";
+    private String totalScore = "0";
+
+    public String getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(String totalScore) {
+        this.totalScore = totalScore;
+    }
 
     public int getSoloKills() {
         return soloKills;
