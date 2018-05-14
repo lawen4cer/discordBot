@@ -70,28 +70,31 @@ public class Stats {
 
     public void ProcessStats() {
 
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().header("TRN-Api-Key", Settings.getApiKey())
-                .url(urlBuild())
-                .build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                channel.sendMessage("We are unable to connect to the server at this time. Try again later").queue();
-            }
+        Thread thread = new Thread(() -> {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().header("TRN-Api-Key", Settings.getApiKey())
+                    .url(urlBuild())
+                    .build();
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    channel.sendMessage("We are unable to connect to the server at this time. Try again later").queue();
+                }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String jsonData = response.body().string();
-                //System.out.println(jsonData);
-                updateDetails(jsonData);
-                updateDisplay(channel);
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String jsonData = response.body().string();
+                    //System.out.println(jsonData);
+                    updateDetails(jsonData);
+                    updateDisplay(channel);
 
 
-            }
-        });
+                }
+            });
+  });
 
+    thread.start();
 
     }
 
